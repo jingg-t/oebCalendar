@@ -1,11 +1,5 @@
 const date = new Date();
 
-const { google } = require('googleapis');
-
-const CLIENT_ID = '322375598882-9h6rdghg9g99bcun5lgd3f98cqn4n9o1.apps.googleusercontent.com';
-const CLIENT_secret = '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';
-const REDIRECT_URI = '';
-
 const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
     13,
     14,
@@ -131,11 +125,9 @@ const renderCalendar = () => {
   
   for (let j = 1; j <= nextDays; j++){
     days += `<div class="next-date">${j}</div>`
-    monthDays.innerHTML = days;
+    
   }
-  
-  
-
+  monthDays.innerHTML = days;
 }
 
 
@@ -150,6 +142,16 @@ function closeForm() {
 }
 
 function renderDetails(matchID) { // show the details of the match
+  const matchDetails = document.querySelector(".matchDetails")
+  
+  let match = "";
+  if (matchID == 13) {
+    for (let i = 0; i <= 2; i++) {
+      match += `<div>hello world</div>`
+    }    
+  }  
+  
+  matchDetails.innerHTML = match;
   console.log(matchID); //ADD JSON READ FILES 
 }
 
