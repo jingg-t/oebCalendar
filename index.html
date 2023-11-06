@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <link rel="stylesheet" href="fs/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="fs/stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="calendar">
+      <div class="month">
+        <i class="fas fa-angle-left prev"></i>
+        <div class="date">
+            <h1></h1> <!-- Placeholder tags to place month -->
+            <p></p> <!-- Placeholder tags to place date -->
+        </div>
+        <i class="fas fa-angle-right next"></i>
+      </div>
+      <div class="weekdays">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+      </div>
+      <div class="days">
+      </div>
+    </div>
+    <div class="sideBar">
+      <div class="details">
+        TEST</br>
+        TEST</br>
+        TEST</br>
+        TEST</br> 
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <script src="fs/script.js"></script>
+  
+  
+  
+  <div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container">
+      <h1>Book an Exhibition Match</h1>
+  
+      <label><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+  
+      <label ><b>Pick Cases</b></label>
+      <select>
+        <option value="case1">case1</option>
+        <option value="case2">case2</option>
+        <option value="case3">case3</option>
+        <option value="case4">case4</option>
+      </select>
+
+      </br></br></br>
+
+      <label><b>Further Details</b></label>
+      <input type="text">
+      <button type="button" class="btn save" onclick="closeForm()">Save</button>
+    </form>
+  </div>
+  
+</body>
+
+
+</html>
