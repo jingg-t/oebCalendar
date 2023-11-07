@@ -1,29 +1,30 @@
 const date = new Date();
 
-const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    5,
-    4
-  ])
 
-  const decMatchDays = new Set([ // DECEMBER hardcoded set of exhibition match days
+const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  5,
+  4
+])
+
+const decMatchDays = new Set([ // DECEMBER hardcoded set of exhibition match days
   1,
   2,
   3,
@@ -77,12 +78,12 @@ const renderCalendar = () => {
   date.setDate(1);
 
   const monthDays = document.querySelector(".days"); //change the days 
-  
+
   // Specific dates 
-  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); 
-  const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate(); 
+  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
   const firstDayIndex = date.getDay();
-  const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay(); 
+  const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
   const nextDays = 7 - lastDayIndex - 1
   const months = [ // used for al the months
     "January",
@@ -98,61 +99,65 @@ const renderCalendar = () => {
     "November",
     "December"
   ]
-  
+
   // write month and date dynamically 
   document.querySelector('.date h1').innerHTML = months[date.getMonth()]
   document.querySelector('.date p').innerHTML = new Date().toDateString();
-  
+
   let days = "";
-  
+
   for (let x = firstDayIndex; x > 0; x--) {
     days += `<div class="prev-date"> ${prevLastDay - x + 1}</div>`
   }
-  
+
   for (let i = 1; i <= lastDay; i++) { // print days from beginning to end
     if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
       days += `<div class="today">${i}</div>`; // when elements are today
-    } else if (novMatchDays.has(i) && date.getMonth() == 10){ // hard coded month of exhibition matches
+    } else if (novMatchDays.has(i) && date.getMonth() == 10) { // hard coded month of exhibition matches
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
-    } else if (decMatchDays.has(i) && date.getMonth() == 11){ // hard coded month of exhibition matches
+    } else if (decMatchDays.has(i) && date.getMonth() == 11) { // hard coded month of exhibition matches
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
-    } else if (janMatchDays.has(i) && date.getMonth() == 0){ // hard coded month of exhibition matches
+    } else if (janMatchDays.has(i) && date.getMonth() == 0) { // hard coded month of exhibition matches
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
-    } else { 
+    } else {
       days += `<div>${i}</div>`;
     }
   }
-  
-  for (let j = 1; j <= nextDays; j++){
+
+  for (let j = 1; j <= nextDays; j++) {
     days += `<div class="next-date">${j}</div>`
-    
+
   }
   monthDays.innerHTML = days;
 }
 
 
 //open form 
-document.querySelector('.days').addEventListener('click', () =>{ 
-  document.getElementById("myForm").style.display = "block";    
-})
+function openForm() {
+  document.getElementById("myForm").style.display = "block"
+}
 
-//WRITE TO FORM HERE 
+//WRITE TO JSON HERE 
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 
-function renderDetails(matchID) { // show the details of the match
+function renderDetails(matchDay) { // show the details of the match
   const matchDetails = document.querySelector(".matchDetails")
+
+  let keyMonth = date.getMonth() + 1; // getmonth() returns index value, increment by 1 to match real value
+  let searchKey = ("" + keyMonth + matchDay); // concatenate two ints into a string, form search key
+
   
   let match = "";
-  if (matchID == 13) {
-    for (let i = 0; i <= 2; i++) {
-      match += `<div>hello world</div>`
-    }    
-  }  
-  
+
+
+  if (matchDay == 13) {
+    match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ryan Yi</p>`
+  }
+
   matchDetails.innerHTML = match;
-  console.log(matchID); //ADD JSON READ FILES 
+  console.log(searchKey);
 }
 
 document.querySelector('.prev').addEventListener('click', () => {
