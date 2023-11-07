@@ -138,7 +138,7 @@ html {
   list-style-type: circle;
   cursor: pointer;
 }
-
+/*Used to format instructions before selecting a match*/
 .matchDetails h1 {
   text-align: center;
   padding-top:70%;

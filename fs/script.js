@@ -154,6 +154,10 @@ function renderDetails(matchDay) { // show the details of the match
 
   if (matchDay == 13) {
     match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ryan Yi</p>`
+    match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Jing Tang</p>`
+    match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ellen Edmonds-Whyte</p>`
+
+
   }
 
   matchDetails.innerHTML = match;
