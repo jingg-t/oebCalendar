@@ -1,5 +1,30 @@
 const date = new Date();
 
+/*
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'";
+import { getAnalytics } from "'https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js'";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBKQ7SbuDkeqsN8d22tAC_a52kpwaKSJVA",
+  authDomain: "oebcalendar-c34e0.firebaseapp.com",
+  databaseURL: "https://oebcalendar-c34e0-default-rtdb.firebaseio.com",
+  projectId: "oebcalendar-c34e0",
+  storageBucket: "oebcalendar-c34e0.appspot.com",
+  messagingSenderId: "1043573677372",
+  appId: "1:1043573677372:web:4978178c657d44f6e81239",
+  measurementId: "G-9LX414H8FZ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+*/
 
 const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
   13,
@@ -20,8 +45,6 @@ const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match day
   28,
   29,
   30,
-  5,
-  4
 ])
 
 const decMatchDays = new Set([ // DECEMBER hardcoded set of exhibition match days
@@ -156,8 +179,6 @@ function renderDetails(matchDay) { // show the details of the match
     match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ryan Yi</p>`
     match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Jing Tang</p>`
     match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ellen Edmonds-Whyte</p>`
-
-
   }
 
   matchDetails.innerHTML = match;
