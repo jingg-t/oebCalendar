@@ -1,31 +1,5 @@
 const date = new Date();
 
-/*
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'";
-import { getAnalytics } from "'https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js'";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBKQ7SbuDkeqsN8d22tAC_a52kpwaKSJVA",
-  authDomain: "oebcalendar-c34e0.firebaseapp.com",
-  databaseURL: "https://oebcalendar-c34e0-default-rtdb.firebaseio.com",
-  projectId: "oebcalendar-c34e0",
-  storageBucket: "oebcalendar-c34e0.appspot.com",
-  messagingSenderId: "1043573677372",
-  appId: "1:1043573677372:web:4978178c657d44f6e81239",
-  measurementId: "G-9LX414H8FZ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-*/
-
 const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
   13,
   14,
@@ -92,9 +66,8 @@ const janMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
   24,
   25,
   26
-])
+]) 
 
-const novMatchDetails = ([]);
 
 const renderCalendar = () => {
 
@@ -108,7 +81,7 @@ const renderCalendar = () => {
   const firstDayIndex = date.getDay();
   const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
   const nextDays = 7 - lastDayIndex - 1
-  const months = [ // used for al the months
+  const months = [ // used for all the months
     "January",
     "Febuary",
     "March",
@@ -137,29 +110,29 @@ const renderCalendar = () => {
     if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
       days += `<div class="today">${i}</div>`; // when elements are today
     } else if (novMatchDays.has(i) && date.getMonth() == 10) { // hard coded month of exhibition matches
+      days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`; // pass id number as code
+    } else if (decMatchDays.has(i) && date.getMonth() == 11) { 
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
-    } else if (decMatchDays.has(i) && date.getMonth() == 11) { // hard coded month of exhibition matches
-      days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
-    } else if (janMatchDays.has(i) && date.getMonth() == 0) { // hard coded month of exhibition matches
+    } else if (janMatchDays.has(i) && date.getMonth() == 0) { 
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
     } else {
       days += `<div>${i}</div>`;
     }
   }
 
-  for (let j = 1; j <= nextDays; j++) {
+  for (let j = 1; j <= nextDays; j++) { // print out the daysof the next month differently
     days += `<div class="next-date">${j}</div>`
 
   }
   monthDays.innerHTML = days;
 }
-
-
+let matchClicked = 0;
 //open form 
-function openForm() {
+function openForm(finalClick) {
   document.getElementById("myForm").style.display = "block"
+  matchClicked = finalClick;
 }
-
+const formEL = document.querySelector('.formContainer'); 
 //WRITE TO JSON HERE 
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
@@ -170,21 +143,44 @@ function renderDetails(matchDay) { // show the details of the match
 
   let keyMonth = date.getMonth() + 1; // getmonth() returns index value, increment by 1 to match real value
   let searchKey = ("" + keyMonth + matchDay); // concatenate two ints into a string, form search key
-
   
-  let match = "";
+  let match = ""; // read from db to render match details unique to the day
+  fetch ('https://oebcalendar-c34e0-default-rtdb.firebaseio.com/posts.json?AIzaSyBKQ7SbuDkeqsN8d22tAC_a52kpwaKSJVA')
+    .then(res => res.json())
+    .then(data => {
+      let parseData = data["read"][searchKey]; // point to the day clicked
+      
+      for (let i = 1; i < parseData.length; i++){
+        let start = parseData[i].start;
+        let end = parseData[i].end;
+        let moderator = parseData[i].moderator; // print out the information read from the data 
+        match += `<p class="specificMatch" onclick="openForm(this.id)" id="${i}"><b>Start Time:</b> ${start} </br> <b>End Time:</b> ${end} </br> <b>Moderator:</b> ${moderator}</p>`
+      }
+      matchDetails.innerHTML = match;
+    });
+  
+  
+  formEL.addEventListener('submit', event => { // event listener to form submission
+    event.preventDefault();
+    const formData = new FormData(formEL);
+    
+    const data = Object.fromEntries(formData);
+    
+    //generates its own unique key in the form of month, day, match number (1 to n)
+    fetch ('https://oebcalendar-c34e0-default-rtdb.firebaseio.com/posts/write/' + searchKey + matchClicked + '.json/?AIzaSyBKQ7SbuDkeqsN8d22tAC_a52kpwaKSJVA', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data) // actual content being written to db from form submission
+    })
 
-
-  if (matchDay == 13) {
-    match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ryan Yi</p>`
-    match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Jing Tang</p>`
-    match += `<p onclick="openForm()"><b>Start Time:</b> 99:99 </br> <b>End Time:</b> 99:99</br> <b>Moderator:</b> Ellen Edmonds-Whyte</p>`
-  }
-
-  matchDetails.innerHTML = match;
-  console.log(searchKey);
+    
+  })
 }
 
+
+// event listeners to change months
 document.querySelector('.prev').addEventListener('click', () => {
   date.setMonth(date.getMonth() - 1)
   renderCalendar()

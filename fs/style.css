@@ -125,8 +125,10 @@ html {
   height:30%;
   width:100%;
   margin: 0px 10px 0px 0px;
+}
 
-
+.matchDetails p:hover {
+  background-color: rgb(111, 119, 119);
 }
 
 .matchDetails p {
@@ -161,7 +163,7 @@ html {
 }
 
 /* The popup form - hidden by default */
-.form-popup {
+.form {
   display: none;
   position: fixed;
   bottom: 0;
@@ -171,14 +173,14 @@ html {
 }
 
 /* Add styles to the form container */
-.form-container {
+.formContainer {
   max-width: 300px;
   padding: 10px;
   background-color: white;
 }
 
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
+.formContainer input[type=text], .formContainer input[type=password] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -187,13 +189,13 @@ html {
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.formContainer input[type=text]:focus, .formContainer input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
-.form-container .btn {
+.formContainer .btn {
   background-color: #04AA6D;
   color: white;
   padding: 16px 20px;
@@ -205,11 +207,11 @@ html {
 }
 
 /* Add a red background color to the cancel button */
-.form-container .save {
+.formContainer .submit {
   background-color: #04AA6D;
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.formContainer .btn:hover, .open-button:hover {
   opacity: 1;
 }
