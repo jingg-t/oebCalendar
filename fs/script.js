@@ -3,6 +3,16 @@ const date = new Date();
 
 
 const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
+ 
+])
+
+const decMatchDays = new Set([ // DECEMBER hardcoded set of exhibition match days
+  
+])
+
+const janMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
+  11,
+  12,
   13,
   14,
   15,
@@ -21,53 +31,11 @@ const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match day
   28,
   29,
   30,
+  31
 ])
 
-const decMatchDays = new Set([ // DECEMBER hardcoded set of exhibition match days
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17,
-  18,
-  19,
-  20,
-  21,
-  22
-])
-
-const janMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17,
-  18,
-  19,
-  20,
-  21,
-  22,
-  23,
-  24,
-  25,
-  26
+const febMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
+  1
 ])
 
 const monthDict = {
@@ -131,6 +99,8 @@ const renderCalendar = () => {
     } else if (decMatchDays.has(i) && date.getMonth() == 11) {
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
     } else if (janMatchDays.has(i) && date.getMonth() == 0) {
+      days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
+    } else if (febMatchDays.has(i) && date.getMonth() == 1) {
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`;
     } else {
       days += `<div>${i}</div>`;
@@ -201,16 +171,19 @@ function renderDetails(matchDay) { // show the details of the match
   const matchDetails = document.querySelector(".matchDetails");
   const title = document.querySelector(".dayClicked");
   let keyMonth = date.getMonth() + 1; // getmonth() returns index value, increment by 1 to match real value
-  searchKey = ("" + keyMonth + matchDay); // concatenate two ints into a string, form search key
+  keyMonth += "";
+  if (keyMonth.length == 1) {
+    keyMonth = "0" + keyMonth;
+  }
 
-  title.innerHTML = `<h2>${monthDict[keyMonth]}, ${matchDay}</h2>`
+  searchKey = ("" + keyMonth + matchDay); // concatenate two ints into a string, form search key
+  title.innerHTML = `<h2>${monthDict[keyMonth]}, ${matchDay}</h2>`;
 
   let match = ""; // read from db to render match details unique to the day
   fetch('https://oebcalendar-c34e0-default-rtdb.firebaseio.com/posts.json?AIzaSyBKQ7SbuDkeqsN8d22tAC_a52kpwaKSJVA')
     .then(res => res.json())
     .then(async data => {
       let parseData = data["read"][searchKey]; // point to the day clicked
-
       for (let i = 1; i < objLength(parseData); i++) {
         let start = parseData[i].start;
         let end = parseData[i].end;
