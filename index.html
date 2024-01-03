@@ -16,8 +16,8 @@
       <div class="month">
         <i class="fas fa-angle-left prev"></i>
         <div class="date">
-            <h1></h1> <!-- Placeholder tags to place month -->
-            <p></p> <!-- Placeholder tags to place date -->
+          <h1></h1> <!-- Placeholder tags to place month -->
+          <p></p> <!-- Placeholder tags to place date -->
         </div>
         <i class="fas fa-angle-right next"></i>
       </div>
@@ -33,40 +33,85 @@
       <div class="days">
       </div>
     </div>
+
     <div class="sideBar">
+      <div class="dayClicked">
+        
+      </div>
       <div class="matchDetails">
         <h1>Select a day to find match details</h1>
-        <div class="specifcMatch"></div> 
+      </div>
+
+      <div class="teamDetails"> <!-- Placeholder to input match details -->
+        <div class="legend">
+          
+          <div class="legendColour">
+            <div class="colorBox" id="green">
+            </div>
+
+            <div class="colorBox" id="yellow">
+            </div>
+            <div class="colorBox" id="red">
+            </div>
+          </div>
+          <div class="legendText">
+            <p class="legendText"> : Two empty match slots</p>
+            <br>
+            <p class="legendText">: One empty match slots</p>
+            <br>
+            <p class="legendText">: All match slots filled</p>
+          </div>
+        </div>
+
+
       </div>
     </div>
-  </div>
-    
- 
-  
-  
-  
-  <div class="form" id="myForm">
-    <form class="formContainer">
-      <h1>Book an Exhibition Match</h1>
-      
-      <label><b>Team Name</b></label>
-      <input name="team" type="text" placeholder="Team Name" required>
 
-      <label><b>Email</b></label>
-      <input name="email" type="text" placeholder="Enter Email"  required>
-  
-      <label name="cases" ><b>Pick a Case</b></label>
-      <input name="case" type="text" placeholder="Case Name" required>
-      
 
-      
-      <button type="submit" class="btn submit" onclick="closeForm()">Save</button>
-    </form>
-  </div>
-  
-  
+    <div class="formContainer" id="myForm" autocomplete="off">
+      <div id="formTop" class="formTop">
+        <div class="formTeam">
+          <div class='formTeam'>
+            <h3>Team 1</h3> <b> Team: </b> TBA</br> <b> Email: </b> TBA </br> <b> Case: </b> TBA</br>
+          </div>
+          <div class='formTeam'>
+            <h3>Team 2</h3> <b> Team: </b> TBA</br> <b> Email: </b> TBA </br> <b> Case: </b> TBA</br>
+          </div>
+        </div>
+      </div>
+      <form class="form" id="submitForm">
+        <h2 id="title"></h2>
 
-  <script src="fs/script.js"></script>
+        <label name="teamName"><b>Team Name</b>
+          <input id="inputTeam" name="team" type="text" placeholder="Team Name" value="" required>
+        </label>
+
+        <label name="email"><b>Email</b>
+          <input id="inputEmail" name="email" type="text" placeholder="Enter Email" value="" required>
+        </label>
+
+        <label name="cases"><b>Pick a Case</b>
+          <input id="inputCase" name="case" type="text" placeholder="Case Name" value="" required>
+        </label>
+
+        <button type="submit" class="btn submit">Save</button>
+        <button type="button" class="btn cancel" onclick="clearForm()">Cancel</button>
+      </form>
+    </div>
+
+
+    <div id="popUp">
+      <h1>Error booking match</h1>
+      <br>
+      <p>The slots for this match were filled before you completed your booking. Please refresh the page.</p>
+      <br>
+      <button class="btn" type="error" id="confirmButton"> OK
+      </button>
+    </div>
+
+
+
+    <script src="fs/script.js"></script>
 </body>
 
 
