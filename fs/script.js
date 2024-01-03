@@ -126,7 +126,7 @@ function openForm(finalClick) {
   document.getElementById("myForm").style.display = "block"
   matchClicked = finalClick; // assign the match clicked to global variable
 
-  let title = "Book an Exhibition Match for " // dynamically written title 
+  let title = "Book an Exhibition Match" // dynamically written title 
   document.getElementById("title").innerHTML = title;
 
   let teamDetails = ""
@@ -171,13 +171,12 @@ function renderDetails(matchDay) { // show the details of the match
   const matchDetails = document.querySelector(".matchDetails");
   const title = document.querySelector(".dayClicked");
   let keyMonth = date.getMonth() + 1; // getmonth() returns index value, increment by 1 to match real value
+  title.innerHTML = `<h2>${monthDict[keyMonth]}, ${matchDay}</h2>`;
   keyMonth += "";
   if (keyMonth.length == 1) {
     keyMonth = "0" + keyMonth;
   }
-
   searchKey = ("" + keyMonth + matchDay); // concatenate two ints into a string, form search key
-  title.innerHTML = `<h2>${monthDict[keyMonth]}, ${matchDay}</h2>`;
 
   let match = ""; // read from db to render match details unique to the day
   fetch('https://oebcalendar-c34e0-default-rtdb.firebaseio.com/posts.json?AIzaSyBKQ7SbuDkeqsN8d22tAC_a52kpwaKSJVA')
