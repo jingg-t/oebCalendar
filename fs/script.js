@@ -27,8 +27,6 @@ const janMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
   24,
   25,
   26,
-  27,
-  28,
   29,
   30,
   31
