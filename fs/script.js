@@ -148,7 +148,7 @@ function openForm(finalClick) {
           teamDetails += `<div class='formTeam'> <h3>Team ${loopCount}</h3>  <b> Team: </b> TBA</br> <b> Email: </b> TBA </br> <b> Case: </b> TBA</br> </div>`;
         }
       }
-       if(teamDetails != "") document.getElementById("formTop").innerHTML = teamDetails; // append and write html
+      if (teamDetails != "") document.getElementById("formTop").innerHTML = teamDetails; // append and write html
 
 
     });
@@ -159,6 +159,7 @@ function openForm(finalClick) {
 function clearForm() {
   document.getElementById("myForm").style.display = "none"; // hide pop up form
   document.getElementById("submitForm").reset(); // empty the fields
+  document.getElementById("formTop").innerHTML = "<div class='formTeam'><h3>Team 1</h3> <b> Team: </b> TBA</br> <b> Email: </b> TBA </br> <b> Case: </b> TBA</br></div><div class='formTeam'><h3>Team 2</h3> <b> Team: </b> TBA</br> <b> Email: </b> TBA </br> <b> Case: </b> TBA</br></div>"
 }
 
 
