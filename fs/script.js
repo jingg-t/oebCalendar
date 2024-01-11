@@ -167,7 +167,6 @@ function clearForm() {
 
 // render the match details 
 function renderDetails(matchDay) { // show the details of the match
-  console.log("fucker");
   const matchDetails = document.querySelector(".matchDetails");
   const title = document.querySelector(".dayClicked");
   let keyMonth = date.getMonth() + 1; // getmonth() returns index value, increment by 1 to match real value
