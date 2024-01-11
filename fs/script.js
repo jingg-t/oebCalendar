@@ -3,11 +3,11 @@ const date = new Date();
 
 
 const novMatchDays = new Set([ // NOVEMBER hardcoded set of exhibition match days
- 
+  
 ])
 
 const decMatchDays = new Set([ // DECEMBER hardcoded set of exhibition match days
-  
+  15
 ])
 
 const janMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
@@ -32,7 +32,7 @@ const janMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
   31
 ])
 
-const febMatchDays = new Set([ // JANUARY hardcoded set of exhibition match days
+const febMatchDays = new Set([ // FEBRUARY hardcoded set of exhibition match days
   1
 ])
 
@@ -91,7 +91,7 @@ const renderCalendar = () => {
 
   for (let i = 1; i <= lastDay; i++) { // print days from beginning to end
     if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
-      days += `<div class="today">${i}</div>`; // when elements are today
+      days += `<div class="today" id="${i}" onclick="renderDetails(this.id)">${i}</div>`; // when elements are today
     } else if (novMatchDays.has(i) && date.getMonth() == 10) { // hard coded month of exhibition matches
       days += `<div class="matchDay" id="${i}" onclick="renderDetails(this.id)"><u><strong>${i}</strong></u></div>`; // pass id number as code
     } else if (decMatchDays.has(i) && date.getMonth() == 11) {
@@ -167,6 +167,7 @@ function clearForm() {
 
 // render the match details 
 function renderDetails(matchDay) { // show the details of the match
+  console.log("fucker");
   const matchDetails = document.querySelector(".matchDetails");
   const title = document.querySelector(".dayClicked");
   let keyMonth = date.getMonth() + 1; // getmonth() returns index value, increment by 1 to match real value
