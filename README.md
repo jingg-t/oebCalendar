@@ -1,4 +1,4 @@
-This is the first draft of the project. The final version can be found [here]([url](https://github.com/talhahafeez1/talhahafeez1.github.io))
+This is the first draft of the project. The final version can be found [here](https://github.com/talhahafeez1/talhahafeez1.github.io)
 
 Purpose
 
